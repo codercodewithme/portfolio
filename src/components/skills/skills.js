@@ -1,54 +1,84 @@
-import React from 'react';
-import './skills.css';
-const skills = () => {
-    return (
-        <section id='skills' >
-            <div className="skills-head" id='skillsHead'>Skills</div>
-            <div className="skill-content" data-aos="fade-right">
-                <div className="progress-content">
-                    <p><span>HTML</span> <span>100%</span></p>
-                    <progress id="file" value="100" max="100"> 100% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>CSS</span><span>90%</span></p>
-                    <progress id="file" value="90" max="100"> 90% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>JavaScript</span><span>92%</span></p>
-                    <progress id="file" value="92" max="100"> 92% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>Reactjs</span><span>70%</span></p>
-                    <progress id="file" value="70" max="100"> 70% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>php</span><span>90%</span></p>
-                    <progress id="file" value="90" max="100"> 90% </progress>
-                </div>
-                <div className="progress-content">
+import { useEffect, useRef } from 'react';
+import './Skills.css';
 
-                    <p><span>Mysqli</span><span>90%</span></p>
-                    <progress id="file" value="90" max="100"> 90% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>C++</span><span>75%</span></p>
-                    <progress id="file" value="75" max="100"> 75% </progress>
-                </div>
-                <div className="progress-content">
-                    <p><span>python</span><span>65%</span></p>
-                    <progress id="file" value="75" max="100"> 65%% </progress>
-                </div>
+const Skills = () => {
+  const sectionRef = useRef(null);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    const element = sectionRef.current;
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
+
+  const skillCategories = [
+    {
+      title: 'Languages',
+      skills: ['JavaScript', 'C++', 'Core Java']
+    },
+    {
+      title: 'Backend',
+      skills: ['Node.js', 'Express.js', 'REST APIs', 'MVC', 'JWT', 'Socket.io']
+    },
+    {
+      title: 'Frontend',
+      skills: ['React.js', 'HTML', 'CSS', 'Redux']
+    },
+    {
+      title: 'Databases',
+      skills: ['MySQL', 'MongoDB']
+    },
+    {
+      title: 'Cloud & DevOps',
+      skills: ['Docker', 'Grafana', 'Prometheus', 'Loki']
+    },
+    {
+      title: 'Tools & Fundamentals',
+      skills: ['Git', 'Postman', 'Redis', 'OOP', 'Data Structures & Algorithms', 'System Design Basics']
+    }
+  ];
+
+  return (
+    <section ref={sectionRef} className="skills" id="skills">
+      <div className="skills-content">
+        <h2 className="section-title">
+          <span className="section-number">02.</span> Skills
+        </h2>
+        <div className="skills-grid">
+          {skillCategories.map((category, index) => (
+            <div key={index} className="skill-category">
+              <h3 className="category-title">{category.title}</h3>
+              <ul className="skills-list">
+                {category.skills.map((skill, skillIndex) => (
+                  <li key={skillIndex} className="skill-item">
+                    <span className="skill-bullet">▹</span>
+                    {skill}
+                  </li>
+                ))}
+              </ul>
             </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-
-
-
-
-
-
-        </section>
-    )
-}
-
-export default skills
+export default Skills; 

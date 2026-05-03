@@ -1,0 +1,149 @@
+.about {
+  min-height: auto;
+  padding: 80px clamp(20px, 8vw, 150px);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.about-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about.visible .about-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  font-size: clamp(26px, 5vw, 32px);
+  white-space: normal;
+}
+
+.section-number {
+  color: var(--accent);
+  font-family: 'Fira Code', monospace;
+  font-size: clamp(16px, 3vw, 20px);
+  margin-right: 10px;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: min(300px, 35vw);
+  height: 1px;
+  margin-left: 20px;
+  background-color: rgba(100, 255, 218, 0.1);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.6;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-image {
+  position: relative;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.image-wrapper {
+  position: relative;
+  border-radius: 4px;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%) contrast(1);
+  transition: all 0.3s ease;
+}
+
+.image-wrapper:hover {
+  filter: none;
+  mix-blend-mode: normal;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.image-outline {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.image-wrapper:hover .image-outline {
+  transform: translate(-8px, -8px);
+}
+
+@media (max-width: 768px) {
+  .about {
+    padding: 70px 20px;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .about-image {
+    margin-top: 30px;
+    max-width: 250px;
+  }
+
+  .section-title::after {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 60px 15px;
+  }
+
+  .about-grid {
+    gap: 24px;
+  }
+
+  .about-image {
+    max-width: 220px;
+  }
+
+  .image-outline {
+    top: 10px;
+    left: 10px;
+  }
+
+  .section-title::after {
+    display: none;
+  }
+}
